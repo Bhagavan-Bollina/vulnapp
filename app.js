@@ -18,7 +18,6 @@ const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
 });
-
 app.use(session({
   secret: 'work hard',
   resave: true,
@@ -27,7 +26,6 @@ app.use(session({
     mongooseConnection: db
   })
 }));
-
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 

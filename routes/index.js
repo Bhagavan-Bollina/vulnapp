@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
+const Link = require('../models/link');
 
 router.get('/', (req, res, next) => {
 	return res.render('index.ejs');
@@ -25,6 +26,7 @@ router.post('/', (req, res, next) => {
 						} else {
 							c = 1;
 						}
+
 
 						let newPerson = new User({
 							unique_id: c,
@@ -124,5 +126,7 @@ router.post('/forgetpass', (req, res, next) => {
 	});
 
 });
+
+
 
 module.exports = router;
