@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+var bodyParser = require('body-parser');
 const User = require('../models/user');
 const Link = require('../models/link');
 
@@ -84,6 +85,40 @@ router.get('/profile', (req, res, next) => {
 			return res.render('data.ejs', { "name": data.username, "email": data.email });
 		}
 	});
+});
+
+router.post('/profile', (req, res, next) => {
+	// Link.save({ unique_id: req.session.userId, siteName: req.body.siteName, siteUrl: req.body.siteUrl })
+	Link.findOne({}, (err, data) => {
+
+		if (data) {
+			c = data.unique_id + 1;
+		} else {
+			c = 1;
+		}
+
+
+		let newLink = new Link({
+
+			unique_id: req.session.userId,
+			username: req.session.userId,
+			siteName: req.body.siteName,
+			siteUrl: req.body.siteUrl
+
+		});
+
+		newLink.save((err, Link) => {
+			if (err)
+				console.log(err);
+			else
+				console.log('Success');
+		});
+		res.send({ "Success": "You are regestered,You can login now." });
+
+	});
+	// console.log(req.body.siteName);
+	// console.log(req.body.siteUrl);
+	
 });
 
 router.get('/logout', (req, res, next) => {
