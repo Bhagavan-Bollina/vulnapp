@@ -90,7 +90,13 @@ router.get('/profile', (req, res, next) => {
 		}
 	});
 
-	Link.find({}, (err, data) => {
+	router.get('/preview', (req, res, next) => {
+	
+		console.log("hello")
+	
+		});
+
+	Link.find({unique_id: req.session.userId}, (err, data) => {
 		if (!data) {
 			res.redirect('/');
 		} else {

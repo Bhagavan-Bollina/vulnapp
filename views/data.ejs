@@ -42,8 +42,8 @@
 					
 					<thead>
 						<tr>
-						<th>Site Name</th>
-						<th>Site Url</th>
+						<th>SITE NAME</th>
+						<th>SITE URL</th>
 						</tr>
 					</thead>
 				<tbody>
@@ -52,6 +52,8 @@
 						<tr>
 						  <td><%= row.siteName %></td>
 						  <td><%= row.siteUrl %></td>
+						  <td><button type="submit" onclick="preview()">Preview</button></td>
+						  <td><button type="submit">Delete</button></td>
 
 						</tr>
 			  <% })}else{ %>
@@ -88,6 +90,15 @@
 	  crossorigin="anonymous"></script>
 	  <script src="js/bootstrap.min.js"></script>
 	  <script src="js/main.js"></script>
+
+	  <script>
+		function preview() {
+			var xhttp = new XMLHttpRequest();
+			xhttp.open("GET", "preview", true);
+		}
+		
+		</script>
+
 </body>
 
 </html>
