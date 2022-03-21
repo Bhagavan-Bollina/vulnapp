@@ -21,3 +21,9 @@ input{
 	margin-bottom: 5px;
 	border-radius: 5px;
 }
+table, th, td {
+	border: 1px solid black;
+	border-collapse: collapse;
+	padding: 9px;
+
+  }

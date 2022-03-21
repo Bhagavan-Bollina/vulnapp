@@ -42,17 +42,25 @@
 					
 					<thead>
 						<tr>
-						<th>sitename</th>
-						<th>siteurl</th>
+						<th>Site Name</th>
+						<th>Site Url</th>
 						</tr>
 					</thead>
-					
-					<% for (var i =1; i <=10;  i++ ) { %>
-						<br/>  <%= i %> 
-						<% } %>
-					<tr>
-						<td></td>
-					</tr>
+				<tbody>
+					<%if (records.length >0){ %>
+						<% records.forEach(function(row){ %>
+						<tr>
+						  <td><%= row.siteName %></td>
+						  <td><%= row.siteUrl %></td>
+
+						</tr>
+			  <% })}else{ %>
+						  <tr>
+							  <td colspan="6">No Record Found</td>
+							  
+							</tr>
+						  <% } %>
+				</tbody>
 				</table>
 				<div class="abc" id="LangTable">
 					<a href="/logout">Logout</a>

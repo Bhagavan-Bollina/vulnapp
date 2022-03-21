@@ -78,13 +78,28 @@ router.post('/login', (req, res, next) => {
 });
 
 router.get('/profile', (req, res, next) => {
+	
+	var username = null;
 	User.findOne({ unique_id: req.session.userId }, (err, data) => {
 		if (!data) {
 			res.redirect('/');
 		} else {
-			return res.render('data.ejs', { "name": data.username, "email": data.email });
+			 username = data.username;
+
+			 	 
 		}
 	});
+
+	Link.find({}, (err, data) => {
+		if (!data) {
+			res.redirect('/');
+		} else {
+			
+			return res.render('data.ejs', { "records": data, "sitename": data.siteName, "siteurl": data.siteUrl , "name": username });
+			 
+		}
+	});
+
 });
 
 router.post('/profile', (req, res, next) => {
@@ -113,7 +128,7 @@ router.post('/profile', (req, res, next) => {
 			else
 				console.log('Success');
 		});
-		res.send({ "Success": "You are regestered,You can login now." });
+		res.redirect(302, "/profile")
 
 	});
 	// console.log(req.body.siteName);
