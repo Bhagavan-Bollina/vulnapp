@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
+var app = require("node-server-screenshot");
 
 const MongoDBURI = process.env.MONGO_URI || 'mongodb://localhost/Vulnapp';
 
