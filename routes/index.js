@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 var bodyParser = require('body-parser');
+const Pageres = require('pageres');
 const User = require('../models/user');
 const Link = require('../models/link');
 
@@ -90,12 +91,6 @@ router.get('/profile', (req, res, next) => {
 		}
 	});
 
-	router.get('/preview', (req, res, next) => {
-	
-		console.log("hello")
-	
-		});
-
 	Link.find({unique_id: req.session.userId}, (err, data) => {
 		if (!data) {
 			res.redirect('/');
@@ -108,8 +103,25 @@ router.get('/profile', (req, res, next) => {
 
 });
 
+router.get('/preview', (req, res, next) => {
+	User.findOne({ unique_id: req.session.userId }, (err, data) => {
+		if (!data) {
+			res.redirect('/');
+		} 
+	});
+	url=req.query.url;
+	console.log("SSRF1");
+	(async () => {
+		await new Pageres({delay: 2})
+			.src(url , ['480x320', '1024x768', 'iphone 5s'], {crop: true})
+			.dest(__dirname)
+        	.run();
+		console.log("SSRF2");
+})();
+});
+
 router.post('/profile', (req, res, next) => {
-	// Link.save({ unique_id: req.session.userId, siteName: req.body.siteName, siteUrl: req.body.siteUrl })
+	//Link.save({ unique_id: req.session.userId, siteName: req.body.siteName, siteUrl: req.body.siteUrl })
 	Link.findOne({}, (err, data) => {
 
 		if (data) {
@@ -132,13 +144,13 @@ router.post('/profile', (req, res, next) => {
 			if (err)
 				console.log(err);
 			else
-				console.log('Success');
+				console.log('success');
 		});
 		res.redirect(302, "/profile")
 
 	});
-	// console.log(req.body.siteName);
-	// console.log(req.body.siteUrl);
+	//console.log(req.body.siteName);
+	//console.log(req.body.siteUrl);
 	
 });
 

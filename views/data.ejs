@@ -28,7 +28,7 @@
 			</div>
 		  <h2>Bookmark Functionality</h2>
 		  <!-- <form id="myForm"  method="post"> -->
-			<div class="form-group ">
+			<div class="form-group">
 				<form id="form" action="/profile" method="post" >
 					<label>Site Name</label>
 					<input type="text" class="form-control" name="siteName" placeholder="Website Name">
@@ -52,7 +52,8 @@
 						<tr>
 						  <td><%= row.siteName %></td>
 						  <td><%= row.siteUrl %></td>
-						  <td><button type="submit" onclick="preview()">Preview</button></td>
+						  <td><input type="button" value="Preview" onclick="preview('<%= row.siteUrl %>')" /></td>
+						  
 						  <td><button type="submit">Delete</button></td>
 
 						</tr>
@@ -92,9 +93,15 @@
 	  <script src="js/main.js"></script>
 
 	  <script>
-		function preview() {
-			var xhttp = new XMLHttpRequest();
-			xhttp.open("GET", "preview", true);
+		function preview(urlArg) {
+			
+			window.open(urlArg);
+			let xhr = new XMLHttpRequest();
+			let baseURL = 'http://127.0.0.1:3000/preview?url=';
+			let fullURL = baseURL.concat(urlArg);
+			xhr.open('get', fullURL);
+			xhr.send();
+			
 		}
 		
 		</script>
