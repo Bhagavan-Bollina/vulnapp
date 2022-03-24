@@ -1,111 +1,119 @@
 <!DOCTYPE html>
 <html>
-
+ 
 <head>
-	<title>VulnApp</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
-	</script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="./css/main.css">
-	
+   <title>VulnApp</title>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+   </script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   <link rel="stylesheet" href="./css/main.css">
+ 
 </head>
-
+ 
 <body onload="fetchBookmarks()" >
-	
-	<div class="container">
-		<div class="header clearfix">
-		  <nav>
-  
-		  </nav>
-		  <h3 class="text-muted">Vulnapp</h3>
-		</div>
-         
-		<div class="jumbotron">
-			
-			<div>
-				<p>Welcome <var><%= name %></var>!</p>
-			</div>
-		  <h2>Bookmark Functionality</h2>
-		  <!-- <form id="myForm"  method="post"> -->
-			<div class="form-group">
-				<form id="form" action="/profile" method="post" >
-					<label>Site Name</label>
-					<input type="text" class="form-control" name="siteName" placeholder="Website Name">
-					<label>Site URL</label>
-					<input type="text" class="form-control" name="siteUrl" placeholder="Website URL">
-					<button type="submit" class="btn btn-primary">Submit</button>
-					<!-- <input type="submit" value="Submit" class="btn btn-success"> -->
-					<!-- <input type="submit" value="Logout" class="btn btn-success" formaction="/logout"> -->
-				</form>
-				<table>
-					
-					<thead>
-						<tr>
-						<th>SITE NAME</th>
-						<th>SITE URL</th>
-						</tr>
-					</thead>
-				<tbody>
-					<%if (records.length >0){ %>
-						<% records.forEach(function(row){ %>
-						<tr>
-						  <td><%= row.siteName %></td>
-						  <td><%= row.siteUrl %></td>
-						  <td><input type="button" value="Preview" onclick="preview('<%= row.siteUrl %>')" /></td>
-						  
-						  <td><button type="submit">Delete</button></td>
-
-						</tr>
-			  <% })}else{ %>
-						  <tr>
-							  <td colspan="6">No Record Found</td>
-							  
-							</tr>
-						  <% } %>
-				</tbody>
-				</table>
-				<div class="abc" id="LangTable">
-					<a href="/logout">Logout</a>
-				</div>
-			</div>
-		  </form>
-		</div>
-		<div class="mssg bg-danger">
-			<span id="check"></span>
-		</div>
-  
-		<div class="row marketing">
-		  <div class="col-lg-12">
-			<div id="bookmarksResults"></div>
-		  </div>
-	
-		</div>
-
-  
-	  </div> <!-- /container -->
-  
-	  <script
-	  src="https://code.jquery.com/jquery-3.1.1.js"
-	  integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
-	  crossorigin="anonymous"></script>
-	  <script src="js/bootstrap.min.js"></script>
-	  <script src="js/main.js"></script>
-
-	  <script>
-		function preview(urlArg) {
-			
-			window.open(urlArg);
-			let xhr = new XMLHttpRequest();
-			let baseURL = 'http://127.0.0.1:3000/preview?url=';
-			let fullURL = baseURL.concat(urlArg);
-			xhr.open('get', fullURL);
-			xhr.send();
-			
-		}
-		
-		</script>
-
+ 
+   <div class="container">
+   	<div class="header clearfix">
+     	<nav>
+      	</nav>
+     	<h3 class="text-muted">Vulnapp</h3>
+   	</div>
+  	 
+   	<div class="jumbotron">
+     	 
+       	<div>
+           	<p>Welcome <var><%= name %></var>!</p>
+       	</div>
+     	<h3>Bookmarker</h3>
+     	<!-- <form id="myForm"  method="post"> -->
+       	<div class="form-group">
+           	<form id="form" action="/profile" method="post" >
+               	<label>Site Name</label>
+               	<input type="text" class="form-control" name="siteName" placeholder="Website Name">
+               	<label>Site URL</label>
+               	<input type="text" class="form-control" name="siteUrl" placeholder="Website URL">
+               	<button type="submit" class="btn btn-primary">Submit</button>
+               	<!-- <input type="submit" value="Submit" class="btn btn-success"> -->
+               	<!-- <input type="submit" value="Logout" class="btn btn-success" formaction="/logout"> -->
+           	</form>
+           	<table>
+             	 
+               	<thead>
+                   	<tr>
+                   	<th>SITE NAME</th>
+                   	<th>SITE URL</th>
+                   	</tr>
+               	</thead>
+           	<tbody>
+               	<%if (records.length >0){ %>
+                   	<% records.forEach(function(row){ %>
+                   	<tr>
+                     	<td><%= row.siteName %></td>
+                     	<td><%= row.siteUrl %></td>
+                     	<td><input type="button" value="Preview" onclick="preview('<%= row.siteUrl %>')"/></td>
+                     	<td><input type="button" value="Delete"  onclick="linkdel('<%= row.unique_id %>')"/></td>
+ 
+                   	</tr>
+         	<% })}else{ %>
+                     	<tr>
+                         	<td colspan="6">No Record Found</td>
+                       	 
+                       	</tr>
+                     	<% } %>
+           	</tbody>
+           	</table>
+           	<div class="abc" id="LangTable">
+               	<a href="/logout">Logout</a>
+           	</div>
+       	</div>
+     	</form>
+   	</div>
+   	<div class="mssg bg-danger">
+       	<span id="check"></span>
+   	</div>
+    	<div class="row marketing">
+     	<div class="col-lg-12">
+       	<div id="bookmarksResults"></div>
+     	</div>
+ 
+   	</div>
+ 
+  	</div> <!-- /container -->
+  	<script
+ 	src="https://code.jquery.com/jquery-3.1.1.js"
+ 	integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+ 	crossorigin="anonymous"></script>
+ 	<script src="js/bootstrap.min.js"></script>
+ 	<script src="js/main.js"></script>
+ 
+ 	<script>
+   	function preview(urlArg) {
+     	 
+       	window.open(urlArg);
+       	let xhr = new XMLHttpRequest();
+       	let baseURL = 'http://127.0.0.1:3000/preview?url=';
+       	let fullURL = baseURL.concat(urlArg);
+       	xhr.open('get', fullURL);
+       	xhr.send();
+     	 
+   	}
+ 
+   	function linkdel(linkid) {
+     	 
+       	let xhr = new XMLHttpRequest();
+       	let baseURL = 'http://127.0.0.1:3000/delete/';
+       	let fullURL = baseURL.concat(linkid);
+       	xhr.open('get', fullURL);
+       	xhr.send();
+     	 
+   	}
+ 	 
+   	</script>
+ 
 </body>
-
+ 
 </html>
+ 
+ 
+ 
