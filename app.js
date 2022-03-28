@@ -8,7 +8,7 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 
 
-const MongoDBURI = process.env.MONGO_URI || 'mongodb://localhost/Vulnapp';
+const MongoDBURI = process.env.MONGO_URI || 'mongodb://mymongo/Vulnapp';
 
 mongoose.connect(MongoDBURI, {
   useUnifiedTopology: true,
