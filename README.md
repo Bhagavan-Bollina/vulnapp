@@ -11,7 +11,7 @@ This application is developed intentionally vulnerable. This application has boo
 
 ![bookmarker devices](images/devices.svg)
 
-The application consists of
+The application consists of following vulnerabilities
 
 - SSRF(Screenshot of server)
 - XSS(Reflected in profile section)
